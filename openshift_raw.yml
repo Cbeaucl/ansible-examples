@@ -1,0 +1,20 @@
+---
+- name: Push application to OCP
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create a project
+      openshift_raw:
+        state: present
+        host: "https://192.168.99.100:8443/"
+        #host: "{{api_url}}"
+        username: "developer"
+        api_key: ""
+        definition:
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            annotations:
+              openshift.io/description: "A sweet Auto PRoject"
+              openshift.io/display-name: "Auto-Ansible-Magic"
+            name: "neat"
